@@ -42,7 +42,7 @@ export class Game extends Scene
 
     this.jugador = new Jugador(this, {
 
-      x: 2, y: -9,
+      x: 2, y: 7,
       ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
       scale: SCALE_SPRITES,
       depth: DEPTH.jugador
@@ -85,10 +85,10 @@ export class Game extends Scene
 
   create()
   {
-    const {SCREEN, DEPTH} = Settings;
+    const {SCREEN, DEPTH, WORLD_BOUNDS_HEIGHT} = Settings;
 
     this.add.image(0, SCREEN.HEIGHT, 'fondo-azul-celeste')
-      .setScale(1, 20).setOrigin(0, 1).setDepth(DEPTH.fondo);
+      .setScale(1, WORLD_BOUNDS_HEIGHT[Settings.getNivel()]).setOrigin(0, 1).setDepth(DEPTH.fondo);
 
     this.jugador.create();
 
@@ -97,7 +97,7 @@ export class Game extends Scene
       plataf.create();
     });
 
-    //this.set_sonidos();
+    this.set_sonidos();
     this.set_cameras();
     //this.set_cameras_controles();
     this.set_cameras_marcadores();
@@ -276,5 +276,6 @@ export class Game extends Scene
     this.sonidoKey = this.sound.add('key');
     this.sonidoNumkey = this.sound.add('numkey');
     this.sonidoGameover = this.sound.add('gameover-retro');
+    this.sonidoJumpBros = this.sound.add('jump-bros');
   }
 }

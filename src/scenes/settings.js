@@ -81,7 +81,7 @@ export class Settings
         ancho: Settings.SCREEN.WIDTH,
         alto: 34,
         scrollX: 0,
-        scrollY: -90
+        scrollY: 999,
     };
 
     static DEPTH =

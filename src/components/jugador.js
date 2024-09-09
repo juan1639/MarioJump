@@ -1,3 +1,5 @@
+import { play_sonidos } from "../functions/functions.js";
+import { Settings } from "../scenes/settings.js";
 
 export class Jugador
 {
@@ -30,16 +32,27 @@ export class Jugador
         {
             this.jugador.x -= this.jugador.getData('vel-x');
             this.jugador.setFlipX(true);
+            if (this.jugador.x < 0) this.jugador.x = 0;
         }
         else if (this.controles.right.isDown)
         {
             this.jugador.x += this.jugador.getData('vel-x');
             this.jugador.setFlipX(false);
+            
+            if (this.jugador.x > Settings.SCREEN.WIDTH)
+            {
+                this.jugador.x = Settings.SCREEN.WIDTH;
+            }
         }
 
         if (this.jugador.body.touching.down)
         {
             this.jugador.setVelocityY(this.jugador.getData('pow-jump'));
+
+            if (this.controles.right.isDown || this.controles.left.isDown)
+            {
+                play_sonidos(this.relatedScene.sonidoJumpBros, false, 0.5);
+            }
         }
 
         this.cambiarAnimacion();

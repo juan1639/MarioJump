@@ -44,11 +44,14 @@ export class Plataforma
 
             for (let i = 1; i <= xTiles; i ++)
             {
+                const rnd = Phaser.Math.Between(0, 100);
+                const selectFrame = rnd < 19 ? 0 : 1;
+
                 this.plataforma.create(
                     (xIni + i) * ancho,
                     yIni * alto,
                     'plataformas',
-                    1
+                    selectFrame
                 );
             }
         }

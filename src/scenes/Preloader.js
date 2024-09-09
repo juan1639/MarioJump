@@ -74,7 +74,9 @@ export class Preloader extends Scene
         this.load.audio('key', './audio/key.wav');
         this.load.audio('numkey', './audio/numkey.wav');
         this.load.audio('gameover-retro', './audio/gameoveretro.ogg');
-
+        this.load.audio('jump-bros', './audio/jumpbros.ogg');
+        this.load.audio('fireworks', './audio/fireworks.mp3');
+        
         //this.load.audio('you-win', './audio/you-win.mp3');
     }
 
