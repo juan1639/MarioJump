@@ -43,6 +43,13 @@ export class Game extends Scene
       RND_PLAT_ARGS
     } = Settings;
 
+    this.jugador = new Jugador(this, {
+
+      x: 2, y: 2,
+      ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
+      scale: SCALE_SPRITES,
+    });
+
     let vertical = 10;
     this.arrayPlataformas = [];
 
@@ -68,13 +75,6 @@ export class Game extends Scene
       vertical -= 3 + Phaser.Math.Between(0, 1);
     }
 
-    this.jugador = new Jugador(this, {
-
-      x: 2, y: 2,
-      ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
-      scale: SCALE_SPRITES
-    });
-
     this.instanciar_mobileControls();
     this.instanciar_marcadores();
   }
@@ -85,12 +85,12 @@ export class Game extends Scene
   {
     this.add.image(0, 0, 'fondo-azul-celeste').setScale(1).setOrigin(0, 0);
 
+    this.jugador.create();
+
     this.arrayPlataformas.forEach(plataf =>
     {
       plataf.create();
     });
-
-    this.jugador.create();
 
     //this.set_sonidos();
     //this.set_cameras();
@@ -118,13 +118,13 @@ export class Game extends Scene
 
   update()
   {
+    this.jugador.update();
   }
 
   set_colliders()
   { 
     // Collide Jugador-Puntitos
-    this.physics.add.collider(this.jugador.get(), this.arrayPlataformas, colliderJugadorPlataformas, null, this);
-    
+
     // Collide Jugador-PuntitosGordos
     //this.physics.add.overlap(this.jugador.get(), this.puntitosgordos.get(), colliderJugadorPuntitosGordos, exceptoScary, this);
 

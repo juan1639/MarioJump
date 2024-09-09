@@ -1,3 +1,4 @@
+import { colliderJugadorPlataformas } from "../functions/functions.js";
 
 export class Plataforma
 {
@@ -41,13 +42,15 @@ export class Plataforma
 
         // this.plataforma.body.setAllowGravity(false);
         // this.plataforma.setImmovable(true);
+        
+        this.relatedScene.physics.add.collider(this.relatedScene.jugador.get(), this.plataforma,
+            colliderJugadorPlataformas, null, this);
 
         console.log(this.plataforma);
     }
 
     update()
     {
-
     }
 
     get()
