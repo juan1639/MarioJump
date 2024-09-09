@@ -17,11 +17,6 @@ import {
   CrucetaControl
 } from '../components/boton-nuevapartida.js';
 
-import {
-  colliderJugadorPlataformas,
-  play_sonidos
-} from '../functions/functions.js';
-
 export class Game extends Scene
 {
   constructor()
@@ -40,7 +35,9 @@ export class Game extends Scene
       SCALE_SPRITES,
       NRO_COLUMNAS,
       NRO_FILAS,
-      RND_PLAT_ARGS
+      RND_PLAT_ARGS,
+      WORLD_BOUNDS_HEIGHT,
+      DEPTH
     } = Settings;
 
     this.jugador = new Jugador(this, {
@@ -48,12 +45,15 @@ export class Game extends Scene
       x: 2, y: -9,
       ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
       scale: SCALE_SPRITES,
+      depth: DEPTH.jugador
     });
 
     let vertical = 10;
     this.arrayPlataformas = [];
 
-    for (let i = 0; i < 30; i ++)
+    const nivel_nro_plataformas = Math.floor(WORLD_BOUNDS_HEIGHT[Settings.getNivel()] * 2.5);
+
+    for (let i = 0; i < nivel_nro_plataformas; i ++)
     {
       const x = Phaser.Math.Between(0, NRO_COLUMNAS - 3);
       const y = vertical;
@@ -67,6 +67,8 @@ export class Game extends Scene
         ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
         scale: SCALE_GAME,
         sueloAncho: NRO_COLUMNAS + 2,
+        depth: DEPTH.plataformas,
+        nroPlataformas: nivel_nro_plataformas - 1,
         id: i
       });
 
@@ -83,7 +85,10 @@ export class Game extends Scene
 
   create()
   {
-    this.add.image(0, Settings.SCREEN.HEIGHT, 'fondo-azul-celeste').setScale(1, 20).setOrigin(0, 1);
+    const {SCREEN, DEPTH} = Settings;
+
+    this.add.image(0, SCREEN.HEIGHT, 'fondo-azul-celeste')
+      .setScale(1, 20).setOrigin(0, 1).setDepth(DEPTH.fondo);
 
     this.jugador.create();
 
@@ -150,14 +155,15 @@ export class Game extends Scene
 
   set_cameras()
   {
-    const {SCREEN} = Settings;
+    const {SCREEN, WORLD_BOUNDS_HEIGHT} = Settings;
+    const nivel_world_height = WORLD_BOUNDS_HEIGHT[Settings.getNivel()];
 
     this.cameras.main.setBounds(
-      0, -SCREEN.HEIGHT * 20, SCREEN.WIDTH, SCREEN.HEIGHT * 21
+      0, -SCREEN.HEIGHT * nivel_world_height, SCREEN.WIDTH, SCREEN.HEIGHT * (nivel_world_height + 1)
     );
 
     this.physics.world.setBounds(
-      0, -SCREEN.HEIGHT * 20, SCREEN.WIDTH, SCREEN.HEIGHT * 21
+      0, -SCREEN.HEIGHT * nivel_world_height, SCREEN.WIDTH, SCREEN.HEIGHT * (nivel_world_height + 1)
     );
   }
 

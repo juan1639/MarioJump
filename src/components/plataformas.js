@@ -1,4 +1,7 @@
-import { colliderJugadorPlataformas } from "../functions/functions.js";
+import {
+    colliderJugadorPlataformas,
+    exceptoDesdeAbajo
+} from "../functions/functions.js";
 
 export class Plataforma
 {
@@ -10,19 +13,22 @@ export class Plataforma
 
     create()
     {
-        const {xIni, yIni, xTiles, yTiles, ancho, alto, scale, sueloAncho, id} = this.args;
+        const {xIni, yIni, xTiles, yTiles, ancho, alto, scale, sueloAncho, depth, nroPlataformas, id} = this.args;
 
-        if (id === 0)
+        if (id === 0 || id === nroPlataformas)
         {
             this.plataforma = this.relatedScene.physics.add.staticGroup();
+
+            const selectFrame = id === 0 ? 2 : 3;
+            const y = id === 0 ? 10 : yIni;
 
             for (let i = 1; i <= sueloAncho; i ++)
             {
                 this.plataforma.create(
                     (-1 + i) * ancho,
-                    10 * alto,
+                    y * alto,
                     'plataformas',
-                    2
+                    selectFrame
                 );
             }
         }
@@ -30,21 +36,29 @@ export class Plataforma
         {
             this.plataforma = this.relatedScene.physics.add.staticGroup();
 
-            this.plataforma.create(
-                xIni * ancho,
-                yIni * alto,
-                'plataformas',
-                1
-            );
+            for (let i = 1; i <= xTiles; i ++)
+            {
+                this.plataforma.create(
+                    (xIni + i) * ancho,
+                    yIni * alto,
+                    'plataformas',
+                    1
+                );
+            }
         }
 
-        this.relatedScene.physics.add.existing(this.plataforma, true);
+        this.plataforma.children.iterate(plataf =>
+        {
+            plataf.setDepth(depth);
+        });
+
+        // this.relatedScene.physics.add.existing(this.plataforma, true);
 
         // this.plataforma.body.setAllowGravity(false);
         // this.plataforma.setImmovable(true);
         
         this.relatedScene.physics.add.collider(this.relatedScene.jugador.get(), this.plataforma,
-            colliderJugadorPlataformas, null, this);
+            colliderJugadorPlataformas, exceptoDesdeAbajo, this);
 
         console.log(this.plataforma);
     }

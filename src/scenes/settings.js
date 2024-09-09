@@ -48,6 +48,8 @@ export class Settings
 
     static txtScore = 'Score: ';
 
+    static WORLD_BOUNDS_HEIGHT = [20, 20, 24, 24, 24, 25, 25, 28, 29, 30];
+
     static fontSettings =
     {
         id: 'font-fire',
@@ -81,7 +83,7 @@ export class Settings
         scrollY: -90
     };
 
-    static depth =
+    static DEPTH =
     {
         fondo: -500,
         nubes: -300,

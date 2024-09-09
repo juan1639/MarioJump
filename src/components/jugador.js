@@ -9,12 +9,13 @@ export class Jugador
 
     create()
     {
-        const {x, y, ancho, alto, scale, potenciaSalto} = this.args;
+        const {x, y, ancho, alto, scale, depth} = this.args;
 
         this.jugador = this.relatedScene.physics.add.sprite(x * ancho, y * alto, 'mario-ssheet', 0);
 
         this.jugador.setData('pow-jump', -480);
         this.jugador.setData('vel-x', 3);
+        this.jugador.setDepth(depth);
         this.jugador.setScale(scale);
         // this.jugador.setVelocityY(-300);
 

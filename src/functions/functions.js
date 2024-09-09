@@ -6,6 +6,15 @@ function colliderJugadorPlataformas(jugador, plataforma)
   // console.log(jugador, puntitos);
 }
 
+function exceptoDesdeAbajo(jugador, plataforma)
+{
+  if (jugador.body.velocity.y < 0)
+  {
+    return false;
+  }
+  return true;
+}
+
 function particulas(x, y, particula, vel, span, size, color, sprite, bool, scene)
 {
   const partis = scene.add.particles(x, y, particula, {
@@ -17,7 +26,7 @@ function particulas(x, y, particula, vel, span, size, color, sprite, bool, scene
     blendMode: 'ADD'
   });
 
-  partis.setDepth(Settings.depth.efectos);
+  partis.setDepth(Settings.DEPTH.efectos);
 
   if (bool) partis.startFollow(sprite);
 }
@@ -45,6 +54,7 @@ function play_sonidos(id, loop, volumen)
 
 export {
   colliderJugadorPlataformas,
+  exceptoDesdeAbajo,
   particulas,
   play_sonidos
 };

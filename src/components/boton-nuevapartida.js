@@ -17,7 +17,7 @@ export class BotonNuevaPartida
     const {left, top, id, scX, scY, angle, originX, originY, texto, nextScene} = this.args;
 
     this.boton = this.relatedScene.add.sprite(left, top, id).setInteractive();
-    this.boton.setScale(scX, scY).setAngle(1).setDepth(Settings.depth.botones);
+    this.boton.setScale(scX, scY).setAngle(1).setDepth(Settings.DEPTH.botones);
 
     let text_size = 24;
     if (id.includes('settings')) text_size = 24;
@@ -34,7 +34,7 @@ export class BotonNuevaPartida
     });
 
     this.txt.create();
-    this.txt.get().setDepth(Settings.depth.textos).setAlpha(1).setScale(1);
+    this.txt.get().setDepth(Settings.DEPTH.textos).setAlpha(1).setScale(1);
 
     this.boton.on('pointerover', () =>
     {
@@ -89,7 +89,7 @@ export class BotonFullScreen
 
     this.boton = this.relatedScene.add.image(x, y, id).setInteractive();
     this.boton.setOrigin(orX, orY).setScale(scX, scY);
-    this.boton.setAngle(ang).setFrame(0).setDepth(Settings.depth.marcadores);
+    this.boton.setAngle(ang).setFrame(0).setDepth(Settings.DEPTH.marcadores);
     this.boton.setX(x).setY(y);
 
     this.boton.on('pointerover', () =>
@@ -132,7 +132,7 @@ export class BotonEsc
     const {left, top, id, scX, scY, angle, originX, originY, texto, nextScene} = this.args;
 
     this.boton = this.relatedScene.add.sprite(left, top, id).setInteractive();
-    this.boton.setOrigin(originX, originY).setScale(scX, scY).setAngle(angle).setDepth(Settings.depth.botones);
+    this.boton.setOrigin(originX, originY).setScale(scX, scY).setAngle(angle).setDepth(Settings.DEPTH.botones);
 
     this.txt = new Textos(this.relatedScene, {
       x: left,
@@ -146,7 +146,7 @@ export class BotonEsc
     });
 
     this.txt.create();
-    this.txt.get().setDepth(Settings.depth.textos).setAlpha(1).setScale(1);
+    this.txt.get().setDepth(Settings.DEPTH.textos).setAlpha(1).setScale(1);
 
     this.boton.on('pointerover', () =>
     {
@@ -215,7 +215,7 @@ export class CrucetaControl
 
     this.boton = this.relatedScene.add.image(x, y, id.slice(0, 7)).setInteractive();
     this.boton.setOrigin(orX, orY).setScale(scX, scY);
-    this.boton.setAngle(ang).setDepth(Settings.depth.controles);
+    this.boton.setAngle(ang).setDepth(Settings.DEPTH.controles);
     this.boton.setX(x).setY(y);
 
     this.isDown = false; // By default No pressed

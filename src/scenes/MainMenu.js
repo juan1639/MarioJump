@@ -52,10 +52,10 @@ export class MainMenu extends Scene
     {
         const aparecerBoton = 1800; // 1800
 
-        this.add.image(0, 0, 'fondo-azul-celeste').setOrigin(0, 0).setDepth(Settings.depth.fondo);
+        this.add.image(0, 0, 'fondo-azul-celeste').setOrigin(0, 0).setDepth(Settings.DEPTH.fondo);
 
         this.txt.create();
-        this.txt.get().setDepth(Settings.depth.textos);
+        this.txt.get().setDepth(Settings.DEPTH.textos);
 
         //this.txtRecords.create();
         //this.txtRecords.get().setVisible(true).setDepth(Settings.depth.textos);
