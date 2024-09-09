@@ -40,6 +40,20 @@ export class Jugador
         {
             this.jugador.setVelocityY(this.jugador.getData('pow-jump'));
         }
+
+        this.cambiarAnimacion();
+    }
+
+    cambiarAnimacion()
+    {
+        if (this.jugador.body.velocity.y < 0)
+        {
+            this.jugador.setFrame(1);
+        }
+        else
+        {
+            this.jugador.setFrame(0);
+        }
     }
 
     get()

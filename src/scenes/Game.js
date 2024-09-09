@@ -45,7 +45,7 @@ export class Game extends Scene
 
     this.jugador = new Jugador(this, {
 
-      x: 2, y: 2,
+      x: 2, y: -9,
       ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
       scale: SCALE_SPRITES,
     });
@@ -53,7 +53,7 @@ export class Game extends Scene
     let vertical = 10;
     this.arrayPlataformas = [];
 
-    for (let i = 0; i < 3; i ++)
+    for (let i = 0; i < 30; i ++)
     {
       const x = Phaser.Math.Between(0, NRO_COLUMNAS - 3);
       const y = vertical;
@@ -83,7 +83,7 @@ export class Game extends Scene
 
   create()
   {
-    this.add.image(0, 0, 'fondo-azul-celeste').setScale(1).setOrigin(0, 0);
+    this.add.image(0, Settings.SCREEN.HEIGHT, 'fondo-azul-celeste').setScale(1, 20).setOrigin(0, 1);
 
     this.jugador.create();
 
@@ -93,7 +93,7 @@ export class Game extends Scene
     });
 
     //this.set_sonidos();
-    //this.set_cameras();
+    this.set_cameras();
     //this.set_cameras_controles();
     this.set_cameras_marcadores();
 
@@ -110,7 +110,7 @@ export class Game extends Scene
 
     this.hideMobileControls();
 
-    //this.cameras.main.startFollow(this.jugador.get());
+    this.cameras.main.startFollow(this.jugador.get());
     // this.cameras.main.followOffset.set(0, 0);
 
     this.set_colliders();
@@ -150,16 +150,14 @@ export class Game extends Scene
 
   set_cameras()
   {
+    const {SCREEN} = Settings;
+
     this.cameras.main.setBounds(
-      0, -Math.floor(Settings.tileXY.y / 2),
-      Math.floor(this.sys.game.config.width * Settings.screen.escBoundsX),
-      Math.floor(this.sys.game.config.height * Settings.screen.escBoundsY + Math.floor(Settings.tileXY.y / 2))
+      0, -SCREEN.HEIGHT * 20, SCREEN.WIDTH, SCREEN.HEIGHT * 21
     );
 
     this.physics.world.setBounds(
-      0, -Math.floor(Settings.tileXY.y / 2),
-      Math.floor(this.sys.game.config.width * Settings.screen.escBoundsX),
-      Math.floor(this.sys.game.config.height * Settings.screen.escBoundsY + Math.floor(Settings.tileXY.y / 2))
+      0, -SCREEN.HEIGHT * 20, SCREEN.WIDTH, SCREEN.HEIGHT * 21
     );
   }
 
