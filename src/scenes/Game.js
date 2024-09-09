@@ -124,6 +124,17 @@ export class Game extends Scene
   update()
   {
     this.jugador.update();
+
+    this.checkNivelSuperado();
+  }
+
+  checkNivelSuperado()
+  {
+    if (this.jugador.get().y <= Settings.getMetaCoorY() && !Settings.isNivelSuperado())
+    {
+      console.log('nivel superado: true');
+      Settings.setNivelSuperado(true);
+    } 
   }
 
   set_colliders()

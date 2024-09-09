@@ -45,6 +45,7 @@ export class Settings
 
     static gameOver = false;
     static nivelSuperado = false;
+    static metaCoorY = -99999;
 
     static txtScore = 'Score: ';
 
@@ -128,6 +129,11 @@ export class Settings
         return Settings.nivelSuperado;
     }
 
+    static getMetaCoorY()
+    {
+        return Settings.metaCoorY;
+    }
+
     static getPuntos()
     {
         return Settings.puntos;
@@ -164,6 +170,11 @@ export class Settings
     static setNivelSuperado(bool)
     {
         Settings.nivelSuperado = bool;
+    }
+
+    static setMetaCoorY(metaY)
+    {
+        Settings.metaCoorY = metaY;
     }
 
     static setPuntos(ptos)

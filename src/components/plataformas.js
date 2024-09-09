@@ -1,3 +1,5 @@
+import { Settings } from "../scenes/settings.js";
+
 import {
     colliderJugadorPlataformas,
     exceptoDesdeAbajo
@@ -15,8 +17,12 @@ export class Plataforma
     {
         const {xIni, yIni, xTiles, yTiles, ancho, alto, scale, sueloAncho, depth, nroPlataformas, id} = this.args;
 
+        
         if (id === 0 || id === nroPlataformas)
         {
+            console.log(id, nroPlataformas, yIni * alto);
+            Settings.setMetaCoorY(yIni * alto);
+
             this.plataforma = this.relatedScene.physics.add.staticGroup();
 
             const selectFrame = id === 0 ? 2 : 3;
