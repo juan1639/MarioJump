@@ -34,21 +34,45 @@ export class Game extends Scene
     Settings.setGameOver(false);
     Settings.setNivelSuperado(false);
 
-    const {TILE_SIZE, SCALE_GAME} = Settings;
+    const {
+      TILE_SIZE,
+      SCALE_GAME,
+      SCALE_SPRITES,
+      NRO_COLUMNAS,
+      NRO_FILAS,
+      RND_PLAT_ARGS
+    } = Settings;
 
-    this.plataforma = new Plataforma(this, {
+    let vertical = 10;
+    this.arrayPlataformas = [];
 
-      xIni: 1, yIni: 9,
-      xTiles: 9, yTiles: 1,
-      ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
-      scale: SCALE_GAME
-    });
+    for (let i = 0; i < 3; i ++)
+    {
+      const x = Phaser.Math.Between(0, NRO_COLUMNAS - 3);
+      const y = vertical;
+      const ancho = Phaser.Math.Between(RND_PLAT_ARGS.ANCHO_MIN, RND_PLAT_ARGS.ANCHO_MAX);
+      const alto = Phaser.Math.Between(RND_PLAT_ARGS.ALTO_MIN, RND_PLAT_ARGS.ALTO_MAX);
+
+      this.plataforma = new Plataforma(this, {
+
+        xIni: x, yIni: y,
+        xTiles: ancho, yTiles: alto,
+        ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
+        scale: SCALE_GAME,
+        sueloAncho: NRO_COLUMNAS + 2,
+        id: i
+      });
+
+      this.arrayPlataformas.push(this.plataforma);
+
+      vertical -= 3 + Phaser.Math.Between(0, 1);
+    }
 
     this.jugador = new Jugador(this, {
 
-      x: 8, y: 2,
+      x: 2, y: 2,
       ancho: TILE_SIZE.X, alto: TILE_SIZE.Y,
-      scale: SCALE_GAME
+      scale: SCALE_SPRITES
     });
 
     this.instanciar_mobileControls();
@@ -61,7 +85,11 @@ export class Game extends Scene
   {
     this.add.image(0, 0, 'fondo-azul-celeste').setScale(1).setOrigin(0, 0);
 
-    this.plataforma.create();
+    this.arrayPlataformas.forEach(plataf =>
+    {
+      plataf.create();
+    });
+
     this.jugador.create();
 
     //this.set_sonidos();
@@ -69,9 +97,9 @@ export class Game extends Scene
     //this.set_cameras_controles();
     this.set_cameras_marcadores();
 
-    this.marcadorPtos.create();
-    this.marcadorNivel.create();
-    this.marcadorHi.create();
+    // this.marcadorPtos.create();
+    // this.marcadorNivel.create();
+    // this.marcadorHi.create();
     this.botonfullscreen.create();
     // this.botonesc.create();
 
@@ -95,7 +123,7 @@ export class Game extends Scene
   set_colliders()
   { 
     // Collide Jugador-Puntitos
-    this.physics.add.collider(this.jugador.get(), this.plataforma.get(), colliderJugadorPlataformas, null, this);
+    this.physics.add.collider(this.jugador.get(), this.arrayPlataformas, colliderJugadorPlataformas, null, this);
     
     // Collide Jugador-PuntitosGordos
     //this.physics.add.overlap(this.jugador.get(), this.puntitosgordos.get(), colliderJugadorPuntitosGordos, exceptoScary, this);

@@ -15,12 +15,27 @@ export class Settings
 
     static TILE_SIZE =
     {
-        X: 16,
-        Y: 16
+        X: 32,
+        Y: 32,
+        X16: 16,
+        Y16: 16,
+
     };
 
+    static RND_PLAT_ARGS =
+    {
+        ANCHO_MIN: 1,
+        ANCHO_MAX: 7,
+        ALTO_MIN: 1,
+        ALTO_MAX: 1,
+    };
+
+    static NRO_FILAS = Math.floor(Settings.SCREEN.HEIGHT / Settings.TILE_SIZE.X);
+    static NRO_COLUMNAS = Math.floor(Settings.SCREEN.WIDTH / Settings.TILE_SIZE.Y);
+
     static FPS = 60;
-    static SCALE_GAME = 2;
+    static SCALE_GAME = 1;
+    static SCALE_SPRITES = 2;
 
     static puntos = 0;
     static nivel = 1;

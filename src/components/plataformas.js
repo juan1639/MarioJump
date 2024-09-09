@@ -9,16 +9,33 @@ export class Plataforma
 
     create()
     {
-        const {xIni, yIni, xTiles, yTiles, ancho, alto, scale} = this.args;
+        const {xIni, yIni, xTiles, yTiles, ancho, alto, scale, sueloAncho, id} = this.args;
 
-        this.plataforma = this.relatedScene.add.tileSprite(
-            xIni * ancho * 2,
-            yIni * alto * 2,
-            xTiles * ancho * 2,
-            yTiles * alto * 2,
-            'plataformas',
-            1
-        );
+        if (id === 0)
+        {
+            this.plataforma = this.relatedScene.physics.add.staticGroup();
+
+            for (let i = 1; i <= sueloAncho; i ++)
+            {
+                this.plataforma.create(
+                    (-1 + i) * ancho,
+                    10 * alto,
+                    'plataformas',
+                    2
+                );
+            }
+        }
+        else
+        {
+            this.plataforma = this.relatedScene.physics.add.staticGroup();
+
+            this.plataforma.create(
+                xIni * ancho,
+                yIni * alto,
+                'plataformas',
+                1
+            );
+        }
 
         this.relatedScene.physics.add.existing(this.plataforma, true);
 
