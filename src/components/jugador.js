@@ -47,11 +47,14 @@ export class Jugador
 
         if (this.jugador.body.touching.down)
         {
-            this.jugador.setVelocityY(this.jugador.getData('pow-jump'));
-
-            if (this.controles.right.isDown || this.controles.left.isDown)
+            if (!Settings.isNivelSuperado())
             {
-                play_sonidos(this.relatedScene.sonidoJumpBros, false, 0.5);
+                this.jugador.setVelocityY(this.jugador.getData('pow-jump'));
+
+                if (this.controles.right.isDown || this.controles.left.isDown)
+                {
+                    play_sonidos(this.relatedScene.sonidoJumpBros, false, 0.5);
+                }
             }
         }
 

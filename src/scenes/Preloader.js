@@ -51,7 +51,7 @@ export class Preloader extends Scene
     {
         this.load.setPath('assets');
 
-        this.load.image('fondo-azul-celeste', './img/bg.png');
+        this.load.image('fondo-azul-celeste', './img/fondo-azul-celeste.png');
 
         this.load.image('boton-nueva-partida', './img/ui-newgame.png');
         this.load.image('boton-more-settings', './img/ui-newgame.png');
