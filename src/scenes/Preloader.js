@@ -67,6 +67,8 @@ export class Preloader extends Scene
         this.load.spritesheet('plataformas', './img/plataformas-ssheet.png', {frameWidth: 32, frameHeight: 32});
         this.load.spritesheet('mario-ssheet', './img/mario-ss1-mod.png', {frameWidth: 16, frameHeight: 16});
 
+        this.load.image('letrero-IMI', './img/Letrero-IMI-64x64.png');
+
         //  -----------------------------------------------------------------------------------
         //  Archivos de audio
         //  -----------------------------------------------------------------------------------

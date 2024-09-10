@@ -28,13 +28,14 @@ export class Jugador
 
     update()
     {
-        if (this.controles.left.isDown)
+        if (this.controles.left.isDown || this.relatedScene.crucetale.isDown)
         {
             this.jugador.x -= this.jugador.getData('vel-x');
             this.jugador.setFlipX(true);
+
             if (this.jugador.x < 0) this.jugador.x = 0;
         }
-        else if (this.controles.right.isDown)
+        else if (this.controles.right.isDown || this.relatedScene.crucetari.isDown)
         {
             this.jugador.x += this.jugador.getData('vel-x');
             this.jugador.setFlipX(false);

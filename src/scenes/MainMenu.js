@@ -27,11 +27,11 @@ export class MainMenu extends Scene
             x: Math.floor(this.sys.game.config.width / 2),
             y: 0,
             txt: ' Mario \n Jump ',
-            size: 48, color: '#ffa', style: 'bold',
+            size: 64, color: '#ffa', style: 'bold',
             stroke: '#fa1', sizeStroke: 8,
             shadowOsx: 2, shadowOsy: 2, shadowColor: '#111',
             bool1: false, bool2: true, origin: [0.5, 0.5],
-            elastic: Math.floor(this.sys.game.config.height / 4), dura: 3000
+            elastic: Math.floor(this.sys.game.config.height / 3.6), dura: 3000
         });
 
         /* this.txtRecords = new Textos(this, {
@@ -96,7 +96,7 @@ export class MainMenu extends Scene
 
         timeline.play();
 
-        play_sonidos(this.sonidoMarioTuberias, false, 0.1);
+        // play_sonidos(this.sonidoMarioTuberias, false, 0.2);
         
         console.log(this.txt);
     }

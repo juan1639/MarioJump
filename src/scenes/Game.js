@@ -7,6 +7,7 @@
 import { Scene } from 'phaser';
 import { Plataforma } from '../components/plataformas.js';
 import { Jugador } from '../components/jugador.js';
+import { Decorativos } from '../components/decorativos.js';
 import { Textos } from '../components/textos.js';
 import { Marcador } from './../components/marcador.js';
 import { Settings } from './settings.js';
@@ -77,6 +78,10 @@ export class Game extends Scene
       vertical -= 3 + Phaser.Math.Between(0, 1);
     }
 
+    this.decorativos = new Decorativos(this, {
+      ancho: TILE_SIZE.X, alto: TILE_SIZE.Y, depth: DEPTH.decorativos
+    });
+
     this.instanciar_mobileControls();
     this.instanciar_marcadores();
   }
@@ -97,9 +102,11 @@ export class Game extends Scene
       plataf.create();
     });
 
+    this.decorativos.create();
+
     this.set_sonidos();
     this.set_cameras();
-    //this.set_cameras_controles();
+    this.set_cameras_controles();
     this.set_cameras_marcadores();
 
     // this.marcadorPtos.create();
@@ -108,12 +115,12 @@ export class Game extends Scene
     this.botonfullscreen.create();
     // this.botonesc.create();
 
-    this.crucetaup.create();  
-    this.crucetado.create();  
+    //this.crucetaup.create();  
+    //this.crucetado.create();  
     this.crucetale.create();  
     this.crucetari.create();  
 
-    this.hideMobileControls();
+    //this.hideMobileControls();
 
     this.cameras.main.startFollow(this.jugador.get());
     // this.cameras.main.followOffset.set(0, 0);
@@ -180,9 +187,9 @@ export class Game extends Scene
 
   set_cameras_controles()
   {
-    var { x, y, ancho, alto, scrollX, scrollY } = Settings.getCameraControles();
+    var { x, y, ancho, alto, scrollX, scrollY } = Settings.cameraControles;
     
-    this.mapa_controles = this.cameras.add(x, y, ancho, alto).setZoom(0.9).setName('view-controls').setAlpha(1).setOrigin(0, 0);
+    this.mapa_controles = this.cameras.add(x, y, ancho, alto).setZoom(0.9).setName('view-controls').setAlpha(0.5).setOrigin(0, 0);
     this.mapa_controles.scrollX = scrollX;
     this.mapa_controles.scrollY = scrollY;
     // console.log(this.mapa_controles);
@@ -238,37 +245,38 @@ export class Game extends Scene
 
   instanciar_mobileControls()
   {
-    const posY = -1000;
+    const posY = 9000;
     const sizeXY = [128, 128];
     const gap = 20;
+    const {SCREEN} = Settings;
 
-    this.crucetaup = new CrucetaControl(this, {
+    this.crucetale = new CrucetaControl(this, {
+      x: 45,
+      y: 9000 + 45,
+      id: 'cruceta-le',
+      orX: 0.5, orY: 0.5, scX: 0.7, scY: 0.7, ang: 270, alpha: 0.8, texto: ''
+    });
+
+    this.crucetari = new CrucetaControl(this, {
+      x: Math.floor((sizeXY[0] + gap) * 2.1),
+      y: 9000 + 45,
+      id: 'cruceta-ri',
+      orX: 0.5, orY: 0.5, scX: 0.7, scY: 0.7, ang: 90, alpha: 0.8, texto: ''
+    });
+
+    /* this.crucetaup = new CrucetaControl(this, {
       x: sizeXY[0] + gap,
       y: posY,
       id: 'cruceta-up',
       orX: 0.5, orY: 0.5, scX: 1, scY: 1, ang: 0, alpha: 0.8, texto: ''
-    });
+    }); */
 
-    this.crucetado = new CrucetaControl(this, {
+    /* this.crucetado = new CrucetaControl(this, {
       x: sizeXY[0] + gap,
       y: posY + sizeXY[1] + gap,
       id: 'cruceta-do',
       orX: 0.5, orY: 0.5, scX: 1, scY: 1, ang: 180, alpha: 0.8, texto: ''
-    });
-
-    this.crucetale = new CrucetaControl(this, {
-      x: 0,
-      y: posY + sizeXY[1] + gap,
-      id: 'cruceta-le',
-      orX: 0.5, orY: 0.5, scX: 1, scY: 1, ang: 270, alpha: 0.8, texto: ''
-    });
-
-    this.crucetari = new CrucetaControl(this, {
-      x: (sizeXY[0] + gap) * 2,
-      y: posY + sizeXY[1] + gap,
-      id: 'cruceta-ri',
-      orX: 0.5, orY: 0.5, scX: 1, scY: 1, ang: 90, alpha: 0.8, texto: ''
-    });
+    }); */
   }
 
   set_sonidos()
