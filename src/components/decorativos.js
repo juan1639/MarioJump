@@ -13,7 +13,7 @@ export class Decorativos
 
         this.decorativos = this.relatedScene.physics.add.staticGroup();
 
-        this.decorativos.create(1 * ancho, (9 * alto) - 8, 'letrero-IMI');
+        this.decorativos.create(3 * ancho, (9 * alto) - 8, 'letrero-IMI');
 
         this.decorativos.children.iterate(decor =>
         {

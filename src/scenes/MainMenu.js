@@ -96,7 +96,7 @@ export class MainMenu extends Scene
 
         timeline.play();
 
-        // play_sonidos(this.sonidoMarioTuberias, false, 0.2);
+        play_sonidos(this.sonidoMarioTuberias, false, 0.2);
         
         console.log(this.txt);
     }

@@ -23,7 +23,7 @@ export class Nubes
         {
             nub.setDepth(depth);
             nub.setFrame(Phaser.Math.Between(0, 15));
-            nub.setScale(Phaser.Math.FloatBetween(0.8, 1.4));
+            nub.setScale(Phaser.Math.FloatBetween(0.7, 1.2));
         });
 
         console.log(this.nubes);

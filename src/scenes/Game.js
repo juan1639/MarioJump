@@ -18,6 +18,7 @@ import {
   BotonFullScreen,
   CrucetaControl
 } from '../components/boton-nuevapartida.js';
+import { play_sonidos } from '../functions/functions.js';
 
 export class Game extends Scene
 {
@@ -153,6 +154,7 @@ export class Game extends Scene
     {
       console.log('nivel superado: true');
       Settings.setNivelSuperado(true);
+      play_sonidos(this.sonidoFireworks, false, 0.8);
     } 
   }
 
@@ -297,5 +299,6 @@ export class Game extends Scene
     this.sonidoNumkey = this.sound.add('numkey');
     this.sonidoGameover = this.sound.add('gameover-retro');
     this.sonidoJumpBros = this.sound.add('jump-bros');
+    this.sonidoFireworks = this.sound.add('fireworks');
   }
 }
