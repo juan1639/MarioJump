@@ -69,6 +69,8 @@ export class Preloader extends Scene
 
         this.load.image('letrero-IMI', './img/Letrero-IMI-64x64.png');
 
+        this.load.spritesheet('nubes-ssheet', './img/nubes-ssheet.png', {frameWidth: 80, frameHeight: 80});
+
         //  -----------------------------------------------------------------------------------
         //  Archivos de audio
         //  -----------------------------------------------------------------------------------

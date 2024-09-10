@@ -8,6 +8,7 @@ import { Scene } from 'phaser';
 import { Plataforma } from '../components/plataformas.js';
 import { Jugador } from '../components/jugador.js';
 import { Decorativos } from '../components/decorativos.js';
+import { Nubes } from '../components/nubes.js';
 import { Textos } from '../components/textos.js';
 import { Marcador } from './../components/marcador.js';
 import { Settings } from './settings.js';
@@ -31,6 +32,7 @@ export class Game extends Scene
     Settings.setNivelSuperado(false);
 
     const {
+      SCREEN,
       TILE_SIZE,
       SCALE_GAME,
       SCALE_SPRITES,
@@ -82,6 +84,15 @@ export class Game extends Scene
       ancho: TILE_SIZE.X, alto: TILE_SIZE.Y, depth: DEPTH.decorativos
     });
 
+    this.nubes = new Nubes(this, {
+      ancho: 80,
+      alto: 80,
+      width: SCREEN.WIDTH,
+      height: SCREEN.HEIGHT,
+      worldBoundsHeight: WORLD_BOUNDS_HEIGHT[Settings.getNivel()] * SCREEN.HEIGHT,
+      depth: DEPTH.nubes
+    });
+
     this.instanciar_mobileControls();
     this.instanciar_marcadores();
   }
@@ -103,6 +114,7 @@ export class Game extends Scene
     });
 
     this.decorativos.create();
+    this.nubes.create();
 
     this.set_sonidos();
     this.set_cameras();

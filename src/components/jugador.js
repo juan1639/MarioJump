@@ -28,6 +28,12 @@ export class Jugador
 
     update()
     {
+        if (Settings.isNivelSuperado())
+        {
+            this.jugador.setFrame(0);
+            return;
+        }
+
         if (this.controles.left.isDown || this.relatedScene.crucetale.isDown)
         {
             this.jugador.x -= this.jugador.getData('vel-x');
@@ -48,14 +54,11 @@ export class Jugador
 
         if (this.jugador.body.touching.down)
         {
-            if (!Settings.isNivelSuperado())
-            {
-                this.jugador.setVelocityY(this.jugador.getData('pow-jump'));
+            this.jugador.setVelocityY(this.jugador.getData('pow-jump'));
 
-                if (this.controles.right.isDown || this.controles.left.isDown)
-                {
-                    play_sonidos(this.relatedScene.sonidoJumpBros, false, 0.5);
-                }
+            if (this.controles.right.isDown || this.controles.left.isDown)
+            {
+                play_sonidos(this.relatedScene.sonidoJumpBros, false, 0.5);
             }
         }
 
